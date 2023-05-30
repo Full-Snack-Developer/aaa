@@ -2,3 +2,4 @@
 @tailwind components;
 @tailwind utilities;
 
+.ant-card-body {padding: 10px!important;}
