@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }) {
       <Layout>
         <HeaderComponent />
         <Layout>
-          <Content className="bg-[#7d5353]">
+          <Content className="bg-[#F5F7FB]">
             <Component {...pageProps} />
           </Content>
           <RightSiderComponent />

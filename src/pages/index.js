@@ -1,7 +1,11 @@
+import HomeScreen from "./HomeScreen";
+
 export default function Home() {
   return (
     <>
-      <div>Demo Page</div>
+      <div>
+        <HomeScreen />
+      </div>
     </>
   );
 }

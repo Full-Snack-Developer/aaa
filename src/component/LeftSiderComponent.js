@@ -42,7 +42,14 @@ const items = [
   {
     key: 4,
     label: "Profile",
-    icon: <Profile size={20} color={colors.grey} variant="Outline" />,
+    icon: (
+      <Profile
+        size={20}
+        color={colors.grey}
+        variant="Outline"
+        style={{ marginTop: 5 }}
+      />
+    ),
   },
 ];
 
@@ -70,10 +77,12 @@ const { Sider } = Layout;
 
 const LeftSiderComponent = () => {
   return (
-    <Sider width={250} theme="light" className="">
+    <Sider width={350} theme="light" className="">
       <div style={{ marginLeft: 20, marginTop: 10 }}>
         <Image src={logo} width={32} height={32} style={{ marginLeft: 40 }} />
-        <TitleComponent text="SPACEPARK" color="#000" />
+        <div>
+          <TitleComponent text="SPACEPARK" color="#000" />
+        </div>
       </div>
       <Card style={{ padding: 10, margin: 20, border: "1px solid grey " }}>
         <UserComponent />
@@ -101,16 +110,16 @@ const LeftSiderComponent = () => {
       {/* <MenuItem text="UIX" title="UI/UX" color="blue" /> */}
       <Card
         style={{
-          width: 210,
+          width: 310,
           marginLeft: 20,
           marginTop: 10,
           borderRadius: 8,
-          border: "1px solid #9BABB8",
+          border: "1px solid grey",
         }}
       >
         <div style={{ display: "flex", flexDirection: "row" }}>
           <Image src={weather} width={32} height={32} />
-          <div style={{ marginLeft: 10 }}>
+          <div style={{ marginLeft: 10, marginTop: 3 }}>
             <TextComponent
               text="UI/UI Comunity"
               color="#9BABB8"
@@ -121,7 +130,7 @@ const LeftSiderComponent = () => {
         </div>
         <div style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
           <Image src={weather} width={32} height={32} />
-          <div style={{ marginLeft: 10 }}>
+          <div style={{ marginLeft: 10, marginTop: 3 }}>
             <TextComponent
               text="Sambat Coding"
               color="#9BABB8"
@@ -132,7 +141,7 @@ const LeftSiderComponent = () => {
         </div>
         <div style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
           <Image src={weather} width={32} height={32} />
-          <div style={{ marginLeft: 10 }}>
+          <div style={{ marginLeft: 10, marginTop: 3 }}>
             <TextComponent
               text="AndroiDev Indo"
               color="#9BABB8"

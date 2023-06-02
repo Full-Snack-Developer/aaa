@@ -1,4 +1,4 @@
-import { Layout } from "antd";
+import { Button, Layout } from "antd";
 import React from "react";
 import { Col, Row } from "antd";
 import Image from "next/image";
@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Input } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Space } from "antd";
+import { auth } from "@/firebase/fireconfig";
 
 const { Header } = Layout;
 const { Search } = Input;
@@ -21,10 +22,20 @@ const HeaderComponent = () => {
           <Col flex={3} className="flex flex-row">
             {/* <h1>Spacepark</h1> */}
           </Col>
-          <Col flex={3}>
-            <Search placeholder="input search text" style={{ width: 300 }} />
+          <Col flex={3} style={{ display: "flex", justifyContent: "flex-end" }}>
+            <Search
+              placeholder="input search text"
+              style={{ width: 290, marginRight: 210, marginTop: 5 }}
+            />
+            <Avatar
+              size="large"
+              icon={<UserOutlined />}
+              style={{ marginRight: 10 }}
+            />
           </Col>
-          <Avatar size="large" icon={<UserOutlined />} />
+          <Button style={{ marginTop: 5 }} onClick={() => auth.signOut()}>
+            Log out
+          </Button>
         </Row>
       </div>
     </Header>
