@@ -21,7 +21,7 @@ const BigCardComponent = ({ post, onEditPost }) => {
         backgroundColor: "#fff",
         marginTop: 20,
         borderRadius: 8,
-        padding: 10,
+        // padding: 10,
       }}
     >
       <div style={{ marginLeft: 10, marginTop: 10 }}>

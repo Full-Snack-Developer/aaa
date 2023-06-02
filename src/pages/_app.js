@@ -3,11 +3,25 @@ import HeaderComponent from "../component/HeaderComponent";
 import LeftSiderComponent from "../component/LeftSiderComponent";
 import RightSiderComponent from "../component/RightSiderComponent";
 import { Layout, Space } from "antd";
+import LoginScreen from "./LoginScreen";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/firebase/fireconfig";
+import { useState } from "react";
 
 const { Content } = Layout;
 
 export default function App({ Component, pageProps }) {
-  return (
+  const [isLogin, setIsLogin] = useState(false);
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  });
+
+  return isLogin ? (
     <Layout>
       <LeftSiderComponent />
       <Layout>
@@ -20,5 +34,7 @@ export default function App({ Component, pageProps }) {
         </Layout>
       </Layout>
     </Layout>
+  ) : (
+    <LoginScreen />
   );
 }

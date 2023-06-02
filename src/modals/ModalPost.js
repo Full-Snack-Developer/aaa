@@ -18,8 +18,9 @@ const ModalPost = (props) => {
   useEffect(() => {
     if (post) {
       setContent(post.content);
+      setfileList([post.imageURL]);
     }
-  }, [post]);
+  }, [post, isVisible]);
 
   const handleClosemodal = () => {
     setfileList([]);
@@ -33,7 +34,7 @@ const ModalPost = (props) => {
 
     for (const i in items) {
       if (items[i].size) {
-        newFiles.push(items[i]);
+        newFiles.push(URL.createObjectURL(items[i]));
       }
     }
 
@@ -160,7 +161,7 @@ const ModalPost = (props) => {
                   width: 150,
                   height: 150,
                 }}
-                src={URL.createObjectURL(item)}
+                src={item}
                 className="img img-thumbnail col mt-2"
               />
 

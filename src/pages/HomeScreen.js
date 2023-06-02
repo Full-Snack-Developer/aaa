@@ -12,10 +12,13 @@ import {
 } from "firebase/firestore";
 import { fs } from "@/firebase/fireconfig";
 import { List } from "antd";
+import ModalPost from "@/modals/ModalPost";
 
 const HomeScreen = () => {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentPost, setCurrentPost] = useState();
+  const [isVisibleModalPost, setIsVisibleModalPost] = useState(false);
 
   useEffect(() => {
     getPosts();
@@ -85,8 +88,21 @@ const HomeScreen = () => {
         loading={isLoading}
         dataSource={posts}
         renderItem={(item) => (
-          <BigCardComponent post={item} onEditPost={() => console.log(item)} />
+          <BigCardComponent
+            post={item}
+            onEditPost={() => {
+              setCurrentPost(item);
+              setIsVisibleModalPost(true);
+            }}
+          />
         )}
+      />
+      <ModalPost
+        isVisible={isVisibleModalPost}
+        onClose={() => {
+          setIsVisibleModalPost(false);
+        }}
+        post={currentPost}
       />
     </div>
   );
