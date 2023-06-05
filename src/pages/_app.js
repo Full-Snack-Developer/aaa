@@ -7,6 +7,7 @@ import LoginScreen from "./LoginScreen";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase/fireconfig";
 import { useState } from "react";
+// import MessageScreen from "./MessageScreen";
 
 const { Content } = Layout;
 
@@ -37,4 +38,5 @@ export default function App({ Component, pageProps }) {
   ) : (
     <LoginScreen />
   );
+  // return <div></div>;
 }

@@ -7,36 +7,40 @@ import { ref } from "firebase/storage";
 import { handleUploadToStorage } from "../utils/uploadFile";
 
 import React, { useEffect, useState } from "react";
+import { data } from "autoprefixer";
 
 const ModalPost = (props) => {
   const { isVisible, onClose, post } = props;
   const [fileList, setfileList] = useState([]);
   const [content, setContent] = useState("");
+  const [imageUrls, setImageUrls] = useState("");
 
   const user = auth.currentUser;
 
   useEffect(() => {
     if (post) {
       setContent(post.content);
-      setfileList([post.imageURL]);
+      setImageUrls(post.imageURL);
     }
   }, [post, isVisible]);
 
   const handleClosemodal = () => {
-    setfileList([]);
     setContent("");
-
+    setfileList([]);
     onClose();
   };
 
   const handleFileSeleted = (items) => {
+    // console.log(items);
     const newFiles = [];
 
     for (const i in items) {
       if (items[i].size) {
-        newFiles.push(URL.createObjectURL(items[i]));
+        newFiles.push(items[i]);
       }
     }
+
+    // console.log(fileList);
 
     setfileList(newFiles);
   };
@@ -48,7 +52,7 @@ const ModalPost = (props) => {
   };
 
   const handlePost = async () => {
-    if (!user) {
+    if (user) {
       const data = {
         imageURL:
           fileList.length > 0 ? await handleUploadToStorage(fileList[0]) : "",
@@ -58,24 +62,7 @@ const ModalPost = (props) => {
         createBy: "hele", //user.uid
       };
 
-      await addDoc(collection(fs, "posts"), data).then(async (snap) => {
-        // upload image to post with post id -> snap.id
-        // if (fileList.length > 0) {
-        //   const imageLinks = [];
-        //   fileList.forEach(async (file) => {
-        //     // handle upload file
-        //     const downloadURL = file.name;
-        //     // lấy được sau khi upload file lên storage
-        //     imageLinks.push(downloadURL);
-        //     if (imageLinks.length === fileList.length) {
-        //       await updateDoc(doc(fs, `posts/${snap.id}`), {
-        //         imageURLs: imageLinks,
-        //         updatedAt: Date.now(),
-        //       });
-        //     }
-        //   });
-        // }
-      });
+      await addDoc(collection(fs, "posts"), data).then(async (snap) => {});
       message.success("Post complete");
       handleClosemodal();
     } else {
@@ -83,9 +70,17 @@ const ModalPost = (props) => {
     }
   };
 
-  const handleUpdatePost = () => {
-    if (post) {
-    }
+  const handleUpdatePost = async () => {
+    updateDoc(doc(fs, `posts/${post.key}`), {
+      content,
+      updatedAt: Date.now(),
+      imageURL:
+        fileList.length > 0
+          ? await handleUploadToStorage(fileList[0])
+          : imageUrls
+          ? imageUrls
+          : "",
+    }).then(() => handleClosemodal());
   };
 
   return (
@@ -147,41 +142,53 @@ const ModalPost = (props) => {
           </Space>
         </div>
       </div>
-      {fileList ? (
-        <div className="row">
-          {fileList.map((item, index) => (
-            <div
-              style={{
-                position: "relative",
-              }}
-              className="col-4"
-            >
-              <img
+      <div className="">
+        {/* {imageUrls && (
+          <img
+            src={imageUrls}
+            style={{
+              width: 150,
+              height: 150,
+            }}
+            className="img img-thumbnail"
+          />
+        )} */}
+        {fileList.length > 0 ? (
+          <div className="row">
+            {fileList.map((item, index) => (
+              <div
                 style={{
-                  width: 150,
-                  height: 150,
+                  position: "relative",
                 }}
-                src={item}
-                className="img img-thumbnail col mt-2"
-              />
+                className="col-4"
+              >
+                <img
+                  style={{
+                    width: 150,
+                    height: 150,
+                  }}
+                  src={URL.createObjectURL(item)}
+                  className="img img-thumbnail col mt-2"
+                />
 
-              <Button
-                onClick={() => handleRemoveImage(index)}
-                type="text"
-                icon={<CloseCircle size={18} color="#212121" />}
-                style={{
-                  position: "absolute",
-                  right: 10,
-                  top: 0,
-                  left: 5,
-                  marginTop: 10,
-                  marginLeft: 10,
-                }}
-              />
-            </div>
-          ))}
-        </div>
-      ) : null}
+                <Button
+                  onClick={() => handleRemoveImage(index)}
+                  type="text"
+                  icon={<CloseCircle size={18} color="#212121" />}
+                  style={{
+                    position: "absolute",
+                    right: 10,
+                    top: 0,
+                    left: 5,
+                    marginTop: 10,
+                    marginLeft: 10,
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        ) : null}
+      </div>
 
       <div>
         <Button

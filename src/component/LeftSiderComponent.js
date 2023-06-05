@@ -10,6 +10,7 @@ import { colors } from "@/contants/colors";
 import MenuItem from "./MenuItem";
 import weather from "../assets/weather.png";
 import TextComponent from "./TextComponent";
+import { Router } from "next/router";
 
 function getItem(label, key, icon, children, type) {
   return {
