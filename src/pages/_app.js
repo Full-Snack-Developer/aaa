@@ -28,7 +28,7 @@ export default function App({ Component, pageProps }) {
       <Layout>
         <HeaderComponent />
         <Layout>
-          <Content className="bg-[#F5F7FB]">
+          <Content style={{}} className="bg-[#F5F7FB]">
             <Component {...pageProps} />
           </Content>
           <RightSiderComponent />
@@ -38,5 +38,4 @@ export default function App({ Component, pageProps }) {
   ) : (
     <LoginScreen />
   );
-  // return <div></div>;
 }

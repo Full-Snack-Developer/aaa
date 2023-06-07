@@ -10,7 +10,8 @@ import { colors } from "@/contants/colors";
 import MenuItem from "./MenuItem";
 import weather from "../assets/weather.png";
 import TextComponent from "./TextComponent";
-import { Router } from "next/router";
+import { useRouter } from "next/router";
+import { auth } from "@/firebase/fireconfig";
 
 function getItem(label, key, icon, children, type) {
   return {
@@ -21,62 +22,67 @@ function getItem(label, key, icon, children, type) {
     type,
   };
 }
-const items = [
-  {
-    key: 1,
-    label: "Home",
-    icon: <Home2 size={20} color={colors.grey} variant="Outline" />,
-  },
-
-  {
-    key: 2,
-    label: "Message",
-    icon: <Message size={20} color={colors.grey} variant="Outline" />,
-  },
-
-  {
-    key: 3,
-    label: "Notification",
-    icon: <Notification size={20} color={colors.grey} variant="Outline" />,
-  },
-
-  {
-    key: 4,
-    label: "Profile",
-    icon: (
-      <Profile
-        size={20}
-        color={colors.grey}
-        variant="Outline"
-        style={{ marginTop: 5 }}
-      />
-    ),
-  },
-];
-
-const itemss = [
-  {
-    key: 1,
-    label: "Sambat Coding",
-    icon: <Home2 color="#555555" variant="Outline" />,
-  },
-
-  {
-    key: 2,
-    label: "UI/UX Comunity",
-    icon: <Home2 color="#555555" variant="Outline" />,
-  },
-
-  {
-    key: 3,
-    label: "AndroiDev indo",
-    icon: <Home2 color="#555555" variant="Outline" />,
-  },
-];
 
 const { Sider } = Layout;
 
 const LeftSiderComponent = () => {
+  const router = useRouter();
+  const items = [
+    {
+      key: 1,
+      label: "Home",
+      icon: <Home2 size={20} color={colors.grey} variant="Outline" />,
+      onClick: () => router.push("/"),
+    },
+
+    {
+      key: 2,
+      label: "Message",
+      icon: <Message size={20} color={colors.grey} variant="Outline" />,
+      onClick: () => router.push("/MessageScreen"),
+    },
+
+    {
+      key: 3,
+      label: "Notification",
+      icon: <Notification size={20} color={colors.grey} variant="Outline" />,
+      onClick: () => router.push("/NotificationScreen"),
+    },
+
+    {
+      key: 4,
+      label: "Profile",
+      icon: (
+        <Profile
+          size={20}
+          color={colors.grey}
+          variant="Outline"
+          style={{ marginTop: 5 }}
+        />
+      ),
+      onClick: () => router.push("/InfomationScreen"),
+    },
+  ];
+  const itemss = [
+    {
+      key: 1,
+      label: "Sambat Coding",
+      icon: <Home2 color="#555555" variant="Outline" />,
+    },
+
+    {
+      key: 2,
+      label: "UI/UX Comunity",
+      icon: <Home2 color="#555555" variant="Outline" />,
+    },
+
+    {
+      key: 3,
+      label: "AndroiDev indo",
+      icon: <Home2 color="#555555" variant="Outline" />,
+    },
+  ];
+  const user = auth.currentUser;
   return (
     <Sider width={350} theme="light" className="">
       <div style={{ marginLeft: 20, marginTop: 10 }}>
@@ -86,7 +92,7 @@ const LeftSiderComponent = () => {
         </div>
       </div>
       <Card style={{ padding: 10, margin: 20, border: "1px solid grey " }}>
-        <UserComponent />
+        <UserComponent uid={user.uid} />
       </Card>
       <Menu
         style={{

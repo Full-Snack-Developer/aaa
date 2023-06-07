@@ -3,14 +3,7 @@ import React from "react";
 
 const MessageScreen = () => {
   return (
-    <div
-    //   style={{
-    //     display: "flex",
-    //     justifyContent: "center",
-    //     alignItems: "center",
-    //     flexDirection: "column",
-    //   }}
-    >
+    <div className="">
       <ChatComponent />
     </div>
   );

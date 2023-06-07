@@ -1,24 +1,27 @@
 import React from "react";
 import TitleComponent from "./TitleComponent";
+import MessContentComponent from "./MessContentComponent";
 import { Card, Input, message } from "antd";
 import { useState } from "react";
-import { getDatabase, push } from "firebase/database";
-import { ref } from "firebase/storage";
-import { db } from "../firebase/fireconfig";
+import { getDatabase, push, ref } from "firebase/database";
+import { auth, db } from "../firebase/fireconfig";
+import { Router, useRouter } from "next/router";
 
 const ChatComponent = () => {
   const [username, setUsername] = useState("");
   const [imessage, setImessage] = useState("");
-
+  const user = auth.currentUser;
+  const router = useRouter();
+  const to = router.query.to;
   const handleSendMessage = () => {
-    if (!username || !imessage) {
+    if (!imessage) {
       message.error("Hãy nhập nội dung");
     }
 
     const data = {
       imessage,
-      from: username,
-      to: "uid to",
+      from: user.uid,
+      to: to ?? "",
       createdAt: Date.now(),
       user1: username,
       user2: "uid",
@@ -29,35 +32,21 @@ const ChatComponent = () => {
       console.log("DONE");
     });
   };
-
+  // console.log(imessage);
   return (
-    <div className="container mt-4">
+    <div className=" mt-4 ">
       <div className="col-8 offset-2">
-        <Card
-          title={
-            <Input
-              placeholder="Username"
-              value={username}
-              onChange={(val) => setUsername(val.target.value)}
-              style={{ width: 250 }}
-              allowClear
-            />
-          }
-          actions={[
-            <div style={{ padding: 12 }}>
-              <Input
-                onPressEnter={handleSendMessage}
-                placeholder="Message"
-                value={imessage}
-                onChange={(val) => setImessage(val.target.value)}
-                maxLength={100}
-                allowClear
-                size="large"
-              />
-            </div>,
-          ]}
-        >
-          AHiHI
+        <Card>
+          <MessContentComponent />
+          <Input
+            onPressEnter={handleSendMessage}
+            placeholder="Message"
+            value={imessage}
+            onChange={(val) => setImessage(val.target.value)}
+            maxLength={100}
+            allowClear
+            size="large"
+          />
         </Card>
       </div>
     </div>

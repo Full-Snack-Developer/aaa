@@ -1,5 +1,4 @@
 import { Button, Layout } from "antd";
-import React from "react";
 import { Col, Row } from "antd";
 import Image from "next/image";
 // import logo from "../assets/logo.png";
@@ -7,11 +6,32 @@ import { Input } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Space } from "antd";
 import { auth } from "@/firebase/fireconfig";
+import React, { useEffect, useState } from "react";
+import { getDoc, doc } from "firebase/firestore";
+import { fs } from "@/firebase/fireconfig";
 
 const { Header } = Layout;
 const { Search } = Input;
 
 const HeaderComponent = () => {
+  const user = auth.currentUser;
+
+  const [userDetail, setUserDetail] = useState();
+
+  useEffect(() => {
+    getUserById();
+  }, [user.uid]);
+
+  const getUserById = async () => {
+    await getDoc(doc(fs, `users/${user.uid}`))
+      .then((item) =>
+        setUserDetail({
+          key: item.id,
+          ...item.data(),
+        })
+      )
+      .catch((error) => console.log(error));
+  };
   return (
     <Header
       className="container-fluid"
@@ -27,11 +47,16 @@ const HeaderComponent = () => {
               placeholder="input search text"
               style={{ width: 290, marginRight: 210, marginTop: 5 }}
             />
-            <Avatar
-              size="large"
-              icon={<UserOutlined />}
-              style={{ marginRight: 10 }}
-            />
+            {userDetail && userDetail.photoURL ? (
+              <Avatar
+                src={userDetail.photoURL}
+                size={40}
+                icon={<UserOutlined />}
+                style={{ marginRight: 10 }}
+              />
+            ) : (
+              ""
+            )}
           </Col>
           <Button style={{ marginTop: 5 }} onClick={() => auth.signOut()}>
             Log out

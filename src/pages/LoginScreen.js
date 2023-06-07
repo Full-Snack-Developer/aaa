@@ -4,14 +4,25 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/firebase/fireconfig";
+import { auth, fs } from "@/firebase/fireconfig";
+import { addDoc, doc, setDoc } from "firebase/firestore";
 
 const onFinish = (values) => {
   console.log(values.email, values.password);
+
   signInWithEmailAndPassword(auth, values.email, values.password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
+
+      const data = {
+        email: user.email,
+        photoURL: user.photoURL,
+      };
+      setDoc(doc(fs, `users/${user.uid}`), data)
+        .then(() => console.log("DONE"))
+        .catch((error) => console.log(error));
+
       console.log("Success:", user);
     })
     .catch((error) => {

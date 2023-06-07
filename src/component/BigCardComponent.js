@@ -24,8 +24,23 @@ const BigCardComponent = ({ post, onEditPost }) => {
         // padding: 10,
       }}
     >
-      <div style={{ marginLeft: 10, marginTop: 10 }}>
-        <UserComponent />
+      <div
+        style={{
+          marginLeft: 20,
+          marginTop: 20,
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <div style={{ marginTop: 20 }}>
+          <UserComponent />
+        </div>
+        <Button
+          style={{ marginTop: 20, marginRight: 20 }}
+          onClick={handRemovePost}
+        >
+          Delete
+        </Button>
       </div>
 
       <div
@@ -49,7 +64,6 @@ const BigCardComponent = ({ post, onEditPost }) => {
           />
         </div>
       </div>
-      <Button onClick={handRemovePost}>Delete</Button>
 
       <div>
         {post.imageURL && (
