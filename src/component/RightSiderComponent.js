@@ -14,7 +14,7 @@ const RightSiderComponent = () => {
       theme="light"
       style={{ display: "flex", justifyContent: "center" }}
     >
-      <div style={{ marginLeft: 20 }}>
+      <div style={{ marginLeft: 5 }}>
         <TitleComponent
           text="MY COMMUNITY"
           size={15}
@@ -27,10 +27,11 @@ const RightSiderComponent = () => {
       <Card
         style={{
           width: 310,
-          marginLeft: 20,
+          marginLeft: 5,
           marginTop: 10,
           borderRadius: 8,
-          border: "1px solid grey",
+          boxShadow:
+            "rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px",
         }}
       >
         <div style={{ display: "flex", flexDirection: "row" }}>
@@ -90,22 +91,23 @@ const RightSiderComponent = () => {
         </div>
       </Card>
 
-      <div style={{ marginLeft: 20, marginTop: 20 }}>
+      <div style={{ marginLeft: 5, marginTop: 20 }}>
         <TitleComponent
           text="SIMILAR COMMUNITY"
           size={15}
           weight={500}
           color="grey"
-          style={{ margin: 20, padding: 10 }}
+          style={{ margin: 10, padding: 10 }}
         />
       </div>
       <Card
         style={{
           width: 310,
-          marginLeft: 20,
+          marginLeft: 5,
           marginTop: 10,
           borderRadius: 8,
-          border: "1px solid grey",
+          boxShadow:
+            "rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px",
         }}
       >
         <div style={{ display: "flex", flexDirection: "row" }}>

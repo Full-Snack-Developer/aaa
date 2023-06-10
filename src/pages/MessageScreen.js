@@ -3,7 +3,7 @@ import React from "react";
 
 const MessageScreen = () => {
   return (
-    <div className="">
+    <div style={{ padding: 20 }}>
       <ChatComponent />
     </div>
   );

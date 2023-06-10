@@ -24,17 +24,31 @@ const MessContentComponent = () => {
     });
   }, []);
   console.log(mess);
+
   return (
     <div style={{ height: 500 }}>
-      hhhhhh
       {mess.length > 0 &&
         mess.map((item, index) => (
-          <List.Item>
+          <List.Item style={{ padding: 10 }}>
             <List.Item.Meta
-              style={{ backgroundColor: item.from === user.uid && "#BFBFBF" }}
+              style={{
+                backgroundColor: item.from === user.uid && "",
+
+                backgroundColor: "",
+              }}
               title={<UserComponent uid={item.from} />}
             />
-            {item.imessage}
+            <div style={{ display: "inline-block", marginTop: 5 }}>
+              <div
+                style={{
+                  backgroundColor: "#526D82",
+                  padding: 10,
+                  borderRadius: 15,
+                }}
+              >
+                {item.imessage}
+              </div>
+            </div>
           </List.Item>
         ))}
     </div>

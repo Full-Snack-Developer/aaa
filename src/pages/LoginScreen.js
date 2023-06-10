@@ -6,6 +6,8 @@ import Link from "next/link";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, fs } from "@/firebase/fireconfig";
 import { addDoc, doc, setDoc } from "firebase/firestore";
+import Image from "next/image";
+import login from "../assets/login.jpg";
 
 const onFinish = (values) => {
   console.log(values.email, values.password);
@@ -36,66 +38,89 @@ const onFinish = (values) => {
 
 const LoginScreen = () => {
   return (
-    <Card style={{ width: 300 }}>
-      <Form
-        name="normal_login"
-        className="login-form"
-        initialValues={{
-          remember: true,
+    <div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          columnGap: 10,
+          marginTop: 220,
         }}
-        onFinish={onFinish}
       >
-        <Form.Item
-          name="email"
-          rules={[
-            {
-              required: true,
-              message: "Please input your Email!",
-            },
-          ]}
-        >
-          <Input
-            prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="Email"
-          />
-        </Form.Item>
-        <Form.Item
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: "Please input your Password!",
-            },
-          ]}
-        >
-          <Input
-            prefix={<LockOutlined className="site-form-item-icon" />}
-            type="password"
-            placeholder="Password"
-          />
-        </Form.Item>
-        <Form.Item>
-          <Form.Item name="remember" valuePropName="checked" noStyle>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-
-          <a className="login-form-forgot" href="">
-            Forgot password
-          </a>
-        </Form.Item>
-
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="login-form-button"
+        <div style={{ height: 500 }}>
+          <Image src={login} style={{ objectFit: "cover", height: 300 }} />
+        </div>
+        <div style={{}}>
+          <Card
+            style={{
+              height: 300,
+              boxShadow: "rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px",
+            }}
           >
-            Log in
-          </Button>
-          Or <Link href="/RegisterScreen">Register</Link>
-        </Form.Item>
-      </Form>
-    </Card>
+            <Form
+              name="normal_login"
+              className="login-form"
+              style={{ marginTop: 30 }}
+              initialValues={{
+                remember: true,
+              }}
+              onFinish={onFinish}
+            >
+              <Form.Item
+                name="email"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Email!",
+                  },
+                ]}
+              >
+                <Input
+                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  placeholder="Email"
+                />
+              </Form.Item>
+              <Form.Item
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Password!",
+                  },
+                ]}
+              >
+                <Input
+                  prefix={<LockOutlined className="site-form-item-icon" />}
+                  type="password"
+                  placeholder="Password"
+                />
+              </Form.Item>
+              <Form.Item>
+                <Form.Item name="remember" valuePropName="checked" noStyle>
+                  <Checkbox>Remember me</Checkbox>
+                </Form.Item>
+
+                <a className="login-form-forgot" href="">
+                  Forgot password
+                </a>
+              </Form.Item>
+
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="login-form-button"
+                  style={{ backgroundColor: "#9DB2BF" }}
+                >
+                  Log in
+                </Button>
+                Or <Link href="/RegisterScreen">Register</Link>
+              </Form.Item>
+            </Form>
+          </Card>
+        </div>
+      </div>
+    </div>
   );
 };
 

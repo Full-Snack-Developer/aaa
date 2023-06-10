@@ -1,10 +1,8 @@
 import { Button, Layout } from "antd";
 import { Col, Row } from "antd";
-import Image from "next/image";
-// import logo from "../assets/logo.png";
 import { Input } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import { Avatar, Space } from "antd";
+import { Avatar } from "antd";
 import { auth } from "@/firebase/fireconfig";
 import React, { useEffect, useState } from "react";
 import { getDoc, doc } from "firebase/firestore";
@@ -52,7 +50,11 @@ const HeaderComponent = () => {
                 src={userDetail.photoURL}
                 size={40}
                 icon={<UserOutlined />}
-                style={{ marginRight: 10 }}
+                style={{
+                  marginRight: 10,
+                  borderRadius: "50%",
+                  border: "1px solid grey",
+                }}
               />
             ) : (
               ""

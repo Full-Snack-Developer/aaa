@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Skeleton, Space, Switch } from "antd";
-import TextComponent from "./TitleComponent";
+import { Avatar, Space } from "antd";
 import TitleComponent from "./TitleComponent";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { fs } from "@/firebase/fireconfig";
@@ -26,7 +25,13 @@ const UserComponent = ({ uid }) => {
   return userDetail ? (
     <Space>
       {userDetail.photoURL ? (
-        <Avatar src={userDetail.photoURL} />
+        <Avatar
+          src={userDetail.photoURL}
+          style={{
+            borderRadius: "50%",
+            border: "1px solid grey",
+          }}
+        />
       ) : (
         <Avatar>
           {userDetail.email
@@ -42,12 +47,6 @@ const UserComponent = ({ uid }) => {
           weight={400}
           color="#9BABB8"
         />
-        {/* <TextComponent
-          text="@JisooAbaba"
-          size={15}
-          weight={200}
-          color="#9BABB8"
-        /> */}
       </div>
     </Space>
   ) : (

@@ -34,10 +34,21 @@ const ChatComponent = () => {
   };
   // console.log(imessage);
   return (
-    <div className=" mt-4 ">
+    <div className="  ">
       <div className="col-8 offset-2">
-        <Card>
-          <MessContentComponent />
+        <Card
+          style={{
+            padding: 10,
+            boxShadow:
+              "rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
+            display: "flex",
+            flexDirection: "column",
+            height: "100%",
+          }}
+        >
+          <div style={{ flex: "1 1 auto", overflow: "auto" }}>
+            <MessContentComponent />
+          </div>
           <Input
             onPressEnter={handleSendMessage}
             placeholder="Message"
@@ -46,6 +57,7 @@ const ChatComponent = () => {
             maxLength={100}
             allowClear
             size="large"
+            style={{ marginTop: "auto" }}
           />
         </Card>
       </div>

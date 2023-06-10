@@ -83,6 +83,7 @@ const LeftSiderComponent = () => {
     },
   ];
   const user = auth.currentUser;
+
   return (
     <Sider width={350} theme="light" className="">
       <div style={{ marginLeft: 20, marginTop: 10 }}>
@@ -91,12 +92,20 @@ const LeftSiderComponent = () => {
           <TitleComponent text="SPACEPARK" color="#000" />
         </div>
       </div>
-      <Card style={{ padding: 10, margin: 20, border: "1px solid grey " }}>
+      <Card
+        style={{
+          padding: 10,
+          margin: 20,
+          boxShadow:
+            "rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px",
+        }}
+      >
         <UserComponent uid={user.uid} />
       </Card>
       <Menu
         style={{
-          border: "1px solid grey ",
+          boxShadow:
+            "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px",
           borderRadius: 8,
           marginTop: 20,
           padding: 10,
@@ -121,7 +130,8 @@ const LeftSiderComponent = () => {
           marginLeft: 20,
           marginTop: 10,
           borderRadius: 8,
-          border: "1px solid grey",
+          boxShadow:
+            "rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px",
         }}
       >
         <div style={{ display: "flex", flexDirection: "row" }}>
