@@ -1,14 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Avatar } from "antd";
 import { Input } from "antd";
-import TitleComponent from "./TitleComponent";
-import { Image, EmojiHappy, VideoAdd } from "iconsax-react";
 import { Button, Space } from "antd";
-import UploadComponent from "./UploadComponent";
 import ModalPost from "@/modals/ModalPost";
-const PostComponent = () => {
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { fs } from "@/firebase/fireconfig";
+
+const PostComponent = ({ uid }) => {
   const [isVisibleModalPost, setIsVisibleModalPost] = useState(false);
+  const [userDetail, setUserDetail] = useState();
+
+  useEffect(() => {
+    getUserById();
+  }, [uid]);
+
+  const getUserById = async () => {
+    await getDoc(doc(fs, `users/${uid}`))
+      .then((item) =>
+        setUserDetail({
+          key: item.id,
+          ...item.data(),
+        })
+      )
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div
@@ -25,11 +41,12 @@ const PostComponent = () => {
         justifyContent: "center",
       }}
     >
-      <Avatar
+      {/* <Avatar
         size={50}
         style={{ border: "1px solid #9BABB8" }}
         src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-      />
+      /> */}
+
       <div style={{ marginLeft: 10 }}>
         <Input style={{ width: 450 }} placeholder="How the weather today ?" />
         <div style={{ display: "flex" }}>

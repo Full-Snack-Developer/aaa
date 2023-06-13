@@ -4,6 +4,11 @@ import React from "react";
 import TitleComponent from "./TitleComponent";
 import TextComponent from "./TextComponent";
 import weather from "../assets/weather.png";
+import icon1 from "../assets/icon1.png";
+import icon2 from "../assets/icon2.png";
+import icon3 from "../assets/icon3.png";
+import icon4 from "../assets/icon4.png";
+import icon5 from "../assets/icon5.png";
 
 const { Sider } = Layout;
 
@@ -111,7 +116,7 @@ const RightSiderComponent = () => {
         }}
       >
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <Image src={weather} width={32} height={32} />
+          <Image src={icon1} width={32} height={32} />
           <div style={{ marginLeft: 10, marginTop: 3 }}>
             <TextComponent
               text="UI/UI Comunity"
@@ -122,7 +127,7 @@ const RightSiderComponent = () => {
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
-          <Image src={weather} width={32} height={32} />
+          <Image src={icon2} width={32} height={32} />
           <div style={{ marginLeft: 10, marginTop: 3 }}>
             <TextComponent
               text="Sambat Coding"
@@ -133,7 +138,7 @@ const RightSiderComponent = () => {
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
-          <Image src={weather} width={32} height={32} />
+          <Image src={icon3} width={32} height={32} />
           <div style={{ marginLeft: 10, marginTop: 3 }}>
             <TextComponent
               text="AndroiDev Indo"
@@ -144,7 +149,7 @@ const RightSiderComponent = () => {
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
-          <Image src={weather} width={32} height={32} />
+          <Image src={icon4} width={32} height={32} />
           <div style={{ marginLeft: 10, marginTop: 3 }}>
             <TextComponent
               text="AndroiDev Indo"
@@ -155,7 +160,7 @@ const RightSiderComponent = () => {
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
-          <Image src={weather} width={32} height={32} />
+          <Image src={icon5} width={32} height={32} />
           <div style={{ marginLeft: 10, marginTop: 3 }}>
             <TextComponent
               text="AndroiDev Indo"

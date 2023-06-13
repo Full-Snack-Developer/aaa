@@ -21,7 +21,6 @@ const UserComponent = ({ uid }) => {
       )
       .catch((error) => console.log(error));
   };
-  console.log(userDetail);
   return userDetail ? (
     <Space>
       {userDetail.photoURL ? (

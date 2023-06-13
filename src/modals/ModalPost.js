@@ -8,9 +8,10 @@ import { handleUploadToStorage } from "../utils/uploadFile";
 
 import React, { useEffect, useState } from "react";
 import { data } from "autoprefixer";
+import CommentsComponent from "@/component/CommentsComponent";
 
 const ModalPost = (props) => {
-  const { isVisible, onClose, post } = props;
+  const { isVisible, onClose, post, isEdit } = props;
   const [fileList, setfileList] = useState([]);
   const [content, setContent] = useState("");
   const [imageUrls, setImageUrls] = useState("");
@@ -59,7 +60,7 @@ const ModalPost = (props) => {
         content,
         createdAt: Date.now(),
         updatedAt: Date.now(),
-        createBy: "hele", //user.uid
+        createBy: user.uid ?? "",
       };
 
       await addDoc(collection(fs, "posts"), data).then(async (snap) => {});
@@ -198,6 +199,11 @@ const ModalPost = (props) => {
         >
           Post
         </Button>
+      </div>
+      <div style={{ marginTop: 10 }}>
+        {!isEdit ? null : (
+          <CommentsComponent postId={post.key} uid={user.uid} />
+        )}
       </div>
     </Modal>
   );

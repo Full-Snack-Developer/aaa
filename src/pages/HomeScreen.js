@@ -29,7 +29,7 @@ const HomeScreen = () => {
 
     // realtime
 
-    await onSnapshot(collection(fs, "posts"), (snap) => {
+    onSnapshot(collection(fs, "posts"), (snap) => {
       if (snap) {
         if (snap) {
           const items = [];
@@ -79,7 +79,7 @@ const HomeScreen = () => {
         flexDirection: "column",
       }}
     >
-      <StoryComponent />
+      {/* <StoryComponent /> */}
 
       <div style={{ marginTop: 20 }}>
         <PostComponent />

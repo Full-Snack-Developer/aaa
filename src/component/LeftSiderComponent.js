@@ -1,5 +1,5 @@
-import { Card, Layout } from "antd";
-import React from "react";
+import { Badge, Card, Layout, Space } from "antd";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import UserComponent from "./UserComponent";
 import TitleComponent from "./TitleComponent";
@@ -7,11 +7,14 @@ import logo from "../assets/logo.png";
 import { Menu } from "antd";
 import { Home2, Message, Notification, Profile } from "iconsax-react";
 import { colors } from "@/contants/colors";
-import MenuItem from "./MenuItem";
-import weather from "../assets/weather.png";
+import icon6 from "../assets/icon6.png";
+import icon7 from "../assets/icon7.png";
+import icon8 from "../assets/icon8.png";
+
 import TextComponent from "./TextComponent";
 import { useRouter } from "next/router";
-import { auth } from "@/firebase/fireconfig";
+import { auth, fs } from "@/firebase/fireconfig";
+import { and, collection, onSnapshot, query, where } from "firebase/firestore";
 
 function getItem(label, key, icon, children, type) {
   return {
@@ -24,8 +27,33 @@ function getItem(label, key, icon, children, type) {
 }
 
 const { Sider } = Layout;
+const user = auth.currentUser;
 
 const LeftSiderComponent = () => {
+  const [notis, setNotis] = useState([]);
+
+  useEffect(() => {
+    getAllNotiUnSeen();
+  }, []);
+
+  const getAllNotiUnSeen = () => {
+    if (user.uid) {
+      const filter = query(
+        collection(fs, "notis"),
+        and(where("to", "==", user.uid), where("isSeen", "==", false))
+      );
+      onSnapshot(filter, (snap) => {
+        if (!snap.empty) {
+          const items = [];
+          snap.forEach((item) => {
+            items.push({ key: item.id, ...item.data() });
+          });
+          setNotis(items);
+        }
+      });
+    }
+  };
+
   const router = useRouter();
   const items = [
     {
@@ -44,8 +72,30 @@ const LeftSiderComponent = () => {
 
     {
       key: 3,
-      label: "Notification",
-      icon: <Notification size={20} color={colors.grey} variant="Outline" />,
+      label: (
+        <Space>
+          Notication
+          <div
+            style={{
+              borderRadius: "50%",
+              backgroundColor: "red",
+              width: 20,
+              height: 20,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "white",
+            }}
+          >
+            {notis.length}
+          </div>
+        </Space>
+      ),
+      icon: (
+        // <Badge count={5}>
+        // </Badge>
+        <Notification size={20} color={colors.grey} variant="Outline" />
+      ),
       onClick: () => router.push("/NotificationScreen"),
     },
 
@@ -60,7 +110,7 @@ const LeftSiderComponent = () => {
           style={{ marginTop: 5 }}
         />
       ),
-      onClick: () => router.push("/InfomationScreen"),
+      // onClick: () => router.push("/InfomationScreen"),
     },
   ];
   const itemss = [
@@ -135,7 +185,7 @@ const LeftSiderComponent = () => {
         }}
       >
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <Image src={weather} width={32} height={32} />
+          <Image src={icon6} width={32} height={32} />
           <div style={{ marginLeft: 10, marginTop: 3 }}>
             <TextComponent
               text="UI/UI Comunity"
@@ -146,7 +196,7 @@ const LeftSiderComponent = () => {
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
-          <Image src={weather} width={32} height={32} />
+          <Image src={icon7} width={32} height={32} />
           <div style={{ marginLeft: 10, marginTop: 3 }}>
             <TextComponent
               text="Sambat Coding"
@@ -157,7 +207,7 @@ const LeftSiderComponent = () => {
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
-          <Image src={weather} width={32} height={32} />
+          <Image src={icon8} width={32} height={32} />
           <div style={{ marginLeft: 10, marginTop: 3 }}>
             <TextComponent
               text="AndroiDev Indo"
