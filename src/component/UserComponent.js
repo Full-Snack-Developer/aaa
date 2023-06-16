@@ -12,15 +12,24 @@ const UserComponent = ({ uid }) => {
   }, [uid]);
 
   const getUserById = async () => {
-    await getDoc(doc(fs, `users/${uid}`))
-      .then((item) =>
+    try {
+      const userDoc = await getDoc(doc(fs, `users/${uid}`));
+      if (userDoc.exists()) {
         setUserDetail({
-          key: item.id,
-          ...item.data(),
-        })
-      )
-      .catch((error) => console.log(error));
+          key: userDoc.id,
+          ...userDoc.data(),
+        });
+      } else {
+        console.log("User not found.");
+        console.log(userDetail);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  console.log(userDetail);
+
   return userDetail ? (
     <Space>
       {userDetail.photoURL ? (

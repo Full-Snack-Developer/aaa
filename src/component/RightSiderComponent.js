@@ -10,6 +10,12 @@ import icon3 from "../assets/icon3.png";
 import icon4 from "../assets/icon4.png";
 import icon5 from "../assets/icon5.png";
 
+import icon9 from "../assets/icon9.png";
+import icon10 from "../assets/icon10.png";
+import icon11 from "../assets/icon11.png";
+import icon12 from "../assets/icon12.png";
+import icon13 from "../assets/icon13.png";
+
 const { Sider } = Layout;
 
 const RightSiderComponent = () => {
@@ -40,10 +46,10 @@ const RightSiderComponent = () => {
         }}
       >
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <Image src={weather} width={32} height={32} />
+          <Image src={icon9} width={32} height={32} />
           <div style={{ marginLeft: 10, marginTop: 3 }}>
             <TextComponent
-              text="UI/UI Comunity"
+              text="Wibu Club"
               color="#9BABB8"
               weight={450}
               size={15}
@@ -51,10 +57,10 @@ const RightSiderComponent = () => {
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
-          <Image src={weather} width={32} height={32} />
+          <Image src={icon10} width={32} height={32} />
           <div style={{ marginLeft: 10, marginTop: 3 }}>
             <TextComponent
-              text="Sambat Coding"
+              text="CS:GO Club"
               color="#9BABB8"
               weight={450}
               size={15}
@@ -62,10 +68,10 @@ const RightSiderComponent = () => {
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
-          <Image src={weather} width={32} height={32} />
+          <Image src={icon11} width={32} height={32} />
           <div style={{ marginLeft: 10, marginTop: 3 }}>
             <TextComponent
-              text="AndroiDev Indo"
+              text="Dota FAN"
               color="#9BABB8"
               weight={450}
               size={15}
@@ -73,10 +79,10 @@ const RightSiderComponent = () => {
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
-          <Image src={weather} width={32} height={32} />
+          <Image src={icon12} width={32} height={32} />
           <div style={{ marginLeft: 10, marginTop: 3 }}>
             <TextComponent
-              text="AndroiDev Indo"
+              text="LOL FAN"
               color="#9BABB8"
               weight={450}
               size={15}
@@ -84,10 +90,10 @@ const RightSiderComponent = () => {
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
-          <Image src={weather} width={32} height={32} />
+          <Image src={icon13} width={32} height={32} />
           <div style={{ marginLeft: 10, marginTop: 3 }}>
             <TextComponent
-              text="AndroiDev Indo"
+              text="Valorant Newbie"
               color="#9BABB8"
               weight={450}
               size={15}

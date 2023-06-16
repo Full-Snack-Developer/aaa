@@ -7,6 +7,7 @@ import { auth } from "@/firebase/fireconfig";
 import React, { useEffect, useState } from "react";
 import { getDoc, doc } from "firebase/firestore";
 import { fs } from "@/firebase/fireconfig";
+import { Logout } from "iconsax-react";
 
 const { Header } = Layout;
 const { Search } = Input;
@@ -43,7 +44,7 @@ const HeaderComponent = () => {
           <Col flex={3} style={{ display: "flex", justifyContent: "flex-end" }}>
             <Search
               placeholder="input search text"
-              style={{ width: 290, marginRight: 210, marginTop: 5 }}
+              style={{ width: 290, marginRight: 255, marginTop: 5 }}
             />
             {userDetail && userDetail.photoURL ? (
               <Avatar
@@ -60,9 +61,13 @@ const HeaderComponent = () => {
               ""
             )}
           </Col>
-          <Button style={{ marginTop: 5 }} onClick={() => auth.signOut()}>
-            Log out
-          </Button>
+          <Button
+            icon={<Logout size={16} />}
+            danger
+            type="text"
+            style={{ marginTop: 5 }}
+            onClick={() => auth.signOut()}
+          ></Button>
         </Row>
       </div>
     </Header>

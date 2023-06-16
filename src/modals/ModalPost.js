@@ -86,7 +86,7 @@ const ModalPost = (props) => {
 
   return (
     <Modal open={isVisible} onCancel={handleClosemodal} footer={null}>
-      <UserComponent />
+      <UserComponent uid={user.uid} />
       <Input.TextArea
         rows={3}
         placeholder="Type something"

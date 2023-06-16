@@ -2,7 +2,6 @@ import { Card } from "antd";
 import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import Link from "next/link";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, fs } from "@/firebase/fireconfig";
 import { addDoc, doc, setDoc } from "firebase/firestore";
@@ -36,7 +35,7 @@ const onFinish = (values) => {
     });
 };
 
-const LoginScreen = () => {
+const LoginScreen = ({ onRegister }) => {
   return (
     <div>
       <div
@@ -57,6 +56,7 @@ const LoginScreen = () => {
               boxShadow: "rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px",
             }}
           >
+            <h1 style={{ fontWeight: "bold", fontSize: 30 }}>LOGIN</h1>
             <Form
               name="normal_login"
               className="login-form"
@@ -106,15 +106,10 @@ const LoginScreen = () => {
               </Form.Item>
 
               <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="login-form-button"
-                  style={{ backgroundColor: "#9DB2BF" }}
-                >
+                <Button htmlType="submit" className="login-form-button">
                   Log in
                 </Button>
-                Or <Link href="/RegisterScreen">Register</Link>
+                Or <Button onClick={onRegister}>Register</Button>
               </Form.Item>
             </Form>
           </Card>

@@ -6,21 +6,26 @@ import { Layout, Space } from "antd";
 import LoginScreen from "./LoginScreen";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase/fireconfig";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import RegisterScreen from "./RegisterScreen";
 // import MessageScreen from "./MessageScreen";
 
 const { Content } = Layout;
 
 export default function App({ Component, pageProps }) {
   const [isLogin, setIsLogin] = useState(false);
+  const [isRegister, setIsRegister] = useState(false);
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  });
+  // Để ở ngoài sẽ bị vòng lặp vô tận
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsLogin(true);
+      } else {
+        setIsLogin(false);
+      }
+    });
+  }, []);
 
   return isLogin ? (
     <Layout>
@@ -35,7 +40,9 @@ export default function App({ Component, pageProps }) {
         </Layout>
       </Layout>
     </Layout>
+  ) : isRegister ? (
+    <RegisterScreen onLogin={() => setIsRegister(false)} />
   ) : (
-    <LoginScreen />
+    <LoginScreen onRegister={() => setIsRegister(true)} />
   );
 }

@@ -9,15 +9,19 @@ import {
   where,
   onSnapshot,
 } from "firebase/firestore";
-import React, { use, useEffect, useState } from "react";
+import { comment } from "postcss";
+import React, { useEffect, useState } from "react";
+import UserComponent from "./UserComponent";
 
 const CommentsComponent = ({ postId, uid, photoURL }) => {
   const [content, setContent] = useState("");
   const [newComment, setNewComment] = useState([]);
 
+  const user = auth.currentUser;
+
   useEffect(() => {
     getComment();
-    getUser();
+    // getUser();
   }, [postId, photoURL]);
 
   const getComment = async () => {
@@ -38,7 +42,9 @@ const CommentsComponent = ({ postId, uid, photoURL }) => {
 
   const addComment = () => {
     addDoc(collection(fs, `comments`), {
-      createdBy: uid,
+      // không có uid
+      // phải để user.uid vào đây, đây là id của người comment, chính là người đang đăng nhập
+      createdBy: user.uid ?? "",
       createdAT: Date.now(),
       postId,
       content,
@@ -48,7 +54,7 @@ const CommentsComponent = ({ postId, uid, photoURL }) => {
   return (
     <div>
       <Input
-        placeholder="HElo"
+        placeholder="Write your comment here..."
         onChange={(val) => setContent(val.target.value)}
         value={content}
         allowClear
@@ -62,9 +68,11 @@ const CommentsComponent = ({ postId, uid, photoURL }) => {
         renderItem={(item) => (
           <List.Item>
             <List.Item.Meta
-              title={"Teen nguowif dung"}
+              // Ở đây phải truyền vào id của người tạo comment chứ không phải người đang đăng nhập
+              // Từ cái id này sẽ hiển thị tên của người comment
+              title={<UserComponent uid={item.createdBy} />}
               description={item.content}
-              avatar={<Avatar />}
+              avatar={photoURL}
             />
           </List.Item>
         )}

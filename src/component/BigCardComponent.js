@@ -83,7 +83,8 @@ const BigCardComponent = ({ post, onEditPost }) => {
         }}
       >
         <div style={{ marginTop: 20 }}>
-          <UserComponent />
+          {/* Chỗ này không truyền uid vào thì qua bên kia nó biết lấy cái gfi */}
+          <UserComponent uid={post.createBy} />
         </div>
         <Button
           style={{ marginTop: 20, marginRight: 20 }}
